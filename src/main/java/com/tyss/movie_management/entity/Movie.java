@@ -1,12 +1,20 @@
 package com.tyss.movie_management.entity;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import java.util.List;
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Data
 @Entity
 @Table(name = "movies")
@@ -20,8 +28,21 @@ public class Movie {
     private Integer releaseYear;
     private String studio;
     private String title;
-
-    @ManyToMany(mappedBy = "movies")
-    private List<Actor> actors;
+    
+    @JoinTable(
+            name = "movie_actor",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    @ManyToMany
+    private List<Actor> actor;
+    
+    @OneToOne(mappedBy = "movie")
+    private Financial financial;
+    
+    @JoinColumn(name = "language_id")
+    @ManyToOne
+    private Language language;
+    
 
 }

@@ -1,10 +1,16 @@
 package com.tyss.movie_management.entity;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import java.util.List;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -17,12 +23,8 @@ public class Actor {
     private Integer actorId;
     private String actorName;
     private Integer birthYear;
-    @JoinTable(
-            name = "movie_actor",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id")
-    )
-    @ManyToMany
+    
+    
+    @ManyToMany(mappedBy = "actor")
     private List<Movie> movies;
-
 }
