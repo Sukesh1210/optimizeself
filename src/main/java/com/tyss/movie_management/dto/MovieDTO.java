@@ -1,5 +1,7 @@
 package com.tyss.movie_management.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +18,10 @@ public class MovieDTO {
     private Integer releaseYear;
     private String studio;
     private String title;
+    
+    private List<ActorDTO> actorDTO; 
+    
+    private LanguageDTO languageDTO;
+    
+    private FinancialDTO financialDTO;
 }

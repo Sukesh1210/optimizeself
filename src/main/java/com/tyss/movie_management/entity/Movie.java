@@ -2,6 +2,7 @@ package com.tyss.movie_management.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,10 +14,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 @AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "movies")
 public class Movie {
 
@@ -34,14 +37,17 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Actor> actor;
     
-    @OneToOne(mappedBy = "movie")
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
     private Financial financial;
     
+    //Cascade helps manage related entities automatically
+    
+    
     @JoinColumn(name = "language_id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Language language;
     
 
