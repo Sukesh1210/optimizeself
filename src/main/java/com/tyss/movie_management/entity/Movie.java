@@ -30,6 +30,7 @@ public class Movie {
     private String industry;
     private Integer releaseYear;
     private String studio;
+    
     private String title;
     
     @JoinTable(
