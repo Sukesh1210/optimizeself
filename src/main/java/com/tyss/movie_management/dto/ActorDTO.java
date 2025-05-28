@@ -9,10 +9,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 @Builder
-public class Movie {
-    private Integer imdbRating;
-    private String industry;
-    private Integer releaseYear;
-    private String studio;
-    private String title;
+public class ActorDTO {
+    private String actorName;
+    private Integer birthYear;
+
 }
