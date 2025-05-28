@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +17,9 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Builder
@@ -38,17 +41,17 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Actor> actor;
     
-    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Financial financial;
     
     //Cascade helps manage related entities automatically
     
     
     @JoinColumn(name = "language_id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Language language;
     
 

@@ -1,5 +1,7 @@
 package com.tyss.movie_management.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.tyss.movie_management.dto.MovieDTO;
@@ -19,9 +21,18 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public MovieDTO addMovie(MovieDTO movieDTO) {
 		Movie movie = movieUtils.movieDtoToMovie(movieDTO);
-		movieRepository.saveAndFlush(movie);
+		movieRepository.saveAndFlush(movie).getTitle();
 		return movieDTO;
 		
 	}
+
+	@Override
+	public MovieDTO getMovie(Integer movieId) {
+		Optional<Movie> movieOpt = movieRepository.findById(movieId);
+	    if (movieOpt.isPresent()) {
+	        return movieUtils.movieToMovieDTO(movieOpt.get());
+	    } else {
+	        throw new RuntimeException("Movie not found");
+	    }	}
 
 }

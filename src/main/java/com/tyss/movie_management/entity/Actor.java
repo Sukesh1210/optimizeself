@@ -11,10 +11,11 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Builder
